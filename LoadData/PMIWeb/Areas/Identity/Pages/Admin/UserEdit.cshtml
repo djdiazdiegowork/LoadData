@@ -1,0 +1,149 @@
+﻿@page
+@model PMIWeb.Areas.Identity.Pages.Admin.UserEditModel
+@{
+    ViewBag.Manage_Menu_Active = "m-menu__item--active";
+}
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title"></h3>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+<div class="m-content">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--bordered-custom rounded-custom">
+                <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                                <i class="flaticon-edit-1 change-panel-color-header-text"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text m--font-transform-u change-panel-color-header-text">
+                                Editar
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post" role="form" class="m-form">
+                    <input asp-for="@Model.UserId" type="hidden" />
+
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--first">
+
+                            <div class="form-group m-form__group">
+                                <partial name="_ValidationSummary" model="@ModelState" />
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.Name"></label>
+                                <input asp-for="Input.Name" class="form-control m-input" />
+                                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.FirstName"></label>
+                                <input asp-for="Input.FirstName" class="form-control m-input" />
+                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.LastName"></label>
+                                <input asp-for="Input.LastName" class="form-control m-input" />
+                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.Email"></label>
+                                <div class="m-input-icon m-input-icon--left">
+                                    <input asp-for="Input.Email" class="form-control m-input">
+                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span><i class="la la-envelope la-2x"></i></span>
+                                    </span>
+                                </div>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="m-form__seperator m-form__seperator--dashed"></div>
+                        <div class="m-form__section m-form__section--last">
+                            <div class="m-form__heading">
+                                <h3 class="m-form__heading-title ">Asociaci&oacute;n de Roles</h3>
+                            </div>
+                            <div class="m-section__content">
+                                <table class="table m-table table-hover">
+                                    <thead style="background-color: #2a94d0; color: #fff">
+                                        <tr>
+                                            <th>
+                                                Rol
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (var i = 0; i < Model.Roles.Count; i++)
+                                        {
+                                            <tr>
+                                                <th>
+                                                    <p class="m-list-search__result-item mt-0 mb-0">
+                                                        <span class="m-list-search__result-item-icon"><i class="flaticon-network m--font-success"></i></span>
+                                                        <span class="m-list-search__result-item-text ml-1">@Model.Roles[i].RoleName</span>
+                                                    </p>
+                                                </th>
+                                                <th>
+                                                    <label class="m-checkbox m-checkbox--success">
+                                                        <input asp-for="Roles[i].IsSelected" type="checkbox" />
+                                                        <span></span>
+                                                    </label>
+                                                    <input asp-for="Roles[i].RoleName" type="hidden" />
+                                                </th>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions m-form__actions">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn btn-brand">Actualizar Usuario</button>
+                                    <a class="btn btn-default" asp-page="/Admin/Index">Cancelar</a>
+                                    <a asp-page="/Account/Manage/ChangePassword" asp-route-userId="@Model.UserId" class="m-link m--font-boldest m--align-right float-right">Cambiar Contraseña</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end::Portlet-->
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Customs_Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/admin/pages/scripts/login.js"></script>
+    <script type="text/javascript">
+        Login.init();
+        ComponentsDropdowns.init();
+    </script>
+}

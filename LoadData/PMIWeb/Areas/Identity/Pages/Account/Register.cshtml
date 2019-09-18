@@ -1,0 +1,220 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registrar";
+    ViewBag.Manage_Menu_Active = "m-menu__item--active";
+}
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title"></h3>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+<div class="m-content">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--bordered-custom rounded-custom">
+                <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                                <i class="change-panel-color-header-text"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text m--font-transform-u change-panel-color-header-text">
+                                Registrar Usuario
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!--begin::Form-->
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post" role="form" class="m-form">
+
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--mofirst">
+
+                            <div class="form-group m-form__group">
+                                <partial name="_ValidationSummary" model="@ModelState" />
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.Name"></label>
+                                <input asp-for="Input.Name" class="form-control m-input" />
+                                <span asp-validation-for="Input.Name" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.FirstName"></label>
+                                <input asp-for="Input.FirstName" class="form-control m-input" />
+                                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.LastName"></label>
+                                <input asp-for="Input.LastName" class="form-control m-input" />
+                                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.Email"></label>
+                                <div class="m-input-icon m-input-icon--left">
+                                    <input asp-for="Input.Email" class="form-control m-input">
+                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span><i class="la la-envelope la-2x"></i></span>
+                                    </span>
+                                </div>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.Password"></label>
+                                <input asp-for="Input.Password" class="form-control m-input" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <label asp-for="Input.ConfirmPassword"></label>
+                                <input asp-for="Input.ConfirmPassword" class="form-control m-input" />
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                            </div>
+
+                            @*{#Imagen#}
+                                <div class="form-group  personData hidden">
+                                    <label class="control-label col-md-3">Foto</label>
+                                    <div class="col-md-9">
+                                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                                            <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;">
+                                            </div>
+                                            <div>
+                                                <span class="btn default btn-file">
+                                                    <span class="fileinput-new">
+                                                        Seleccione la Imagen
+                                                    </span>
+                                                    <span class="fileinput-exists">
+                                                        Cambiar
+                                                    </span>
+                                                    {{ form_widget(formulario.photo) }}
+                                                </span>
+                                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                    Eliminar
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>*@
+
+                        </div>
+
+                        @*<div class="m-form__seperator m-form__seperator--dashed"></div>
+                            <br/>
+
+
+                            <div class="form-group m-form__group">
+                                <div class="m-form__heading">
+                                    <h3 class="m-form__heading-title">Seleccione una imagen</h3>
+                                </div>
+
+                                <div class="m-dropzone dropzone" action="inc/api/dropzone" id="m-dropzone-one" style="width: 200px; height: 200px;">
+                                    <div class="m-dropzone__msg dz-message needsclick">
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        <div class="m-form__seperator m-form__seperator--dashed"></div>
+                        <div class="m-form__section m-form__section--last">
+                            <div class="m-form__heading">
+                                <h3 class="m-form__heading-title ">Asociaci&oacute;n de Roles</h3>
+                            </div>
+                            <div class="m-section__content">
+                                <table class="table m-table table-hover">
+                                    <thead style="background-color: #2a94d0; color: #fff">
+                                        <tr>
+                                            <th>
+                                                Rol
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (var i = 0; i < Model.Roles.Count; i++)
+                                        {
+                                            <tr>
+                                                <th>
+                                                    <p class="m-list-search__result-item mt-0 mb-0">
+                                                        <span class="m-list-search__result-item-icon"><i class="flaticon-network m--font-success"></i></span>
+                                                        <span class="m-list-search__result-item-text ml-1">@Model.Roles[i].RoleName</span>
+                                                    </p>
+                                                </th>
+                                                <th>
+                                                    <label class="m-checkbox m-checkbox--success">
+                                                        <input asp-for="Roles[i].IsSelected" type="checkbox" />
+                                                        <span></span>
+                                                    </label>
+                                                    <input asp-for="Roles[i].RoleName" type="hidden" />
+                                                </th>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions m-form__actions">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="submit" class="btn m-btn--pill btn-brand">Registrar</button>
+                                    <a class="btn m-btn--pill btn-default" asp-page="/Admin/Index">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end::Portlet-->
+
+        </div>
+    </div>
+</div>
+
+@section Customs_Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script type="text/javascript">
+
+        var DropzoneDemo = {
+            init: function () {
+                Dropzone.options.mDropzoneOne =
+                    {
+                        paramName: "file",
+                        maxFiles: 1,
+                        maxFilesize: 1,
+                        addRemoveLinks: !0,
+                        accept: function (e, o) {
+                            "justinbieber.jpg" == e.name ? o("Naha, you don't.") : o()
+                        }
+                    }
+            }
+        };
+        DropzoneDemo.init();
+
+        jQuery(document).ready(function () {
+
+            DropzoneDemo.init();
+
+        });
+
+    </script>
+
+}

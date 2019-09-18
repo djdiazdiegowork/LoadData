@@ -1,0 +1,173 @@
+﻿@model IEnumerable<Common.PMI.PROGRAMTB>
+@{
+    ViewData["Title"] = "Result";
+}
+
+<div class="row margin-bottom-20">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-grid font-dark"></i>
+                    <span class="caption-subject font-dark sbold uppercase">P&Aacute;gina de Resultados</span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default" title="Reporte Excel" onclick="DownloadFile('xlsx')">
+                        <i class="fa fa-file-excel-o"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default" title="Reporte Word" onclick="DownloadFile('docx')">
+                        <i class="fa fa-file-word-o"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model != null)
+{
+    <table id="example" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>PRGMNAME</th>
+                <th>PRGMTYPEID</th>
+                <th>PRGMTYPETB</th>
+                <th>VIDEOFILENAME</th>
+                <th>DIRECTORY</th>
+                <th>DURATIONMS</th>
+                <th>CREATOR</th>
+                <th>CREATETIME</th>
+                <th>EDITOR</th>
+                <th>EDITTIME</th>
+                <th>SUBTYPEID</th>
+                <th>PRGMSUBTYPETB</th>
+                <th>BITRATE</th>
+                <th>FILESIZE</th>
+                <th>LOCKED</th>
+                <th>CHECKOR</th>
+                <th>CHECKTIME</th>
+                <th>CHECKUP</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var prgtb in Model)
+        {
+            <tr>
+                <td>@prgtb.PRGMID</td>
+                <td>@prgtb.PRGMNAME</td>
+                <td>@prgtb.PRGMTYPEID</td>
+                @if (@prgtb.PRGMTYPETB != null)
+                {
+                    <td>@prgtb.PRGMTYPETB.PRGMTYPENAME</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+
+                <td>@prgtb.VIDEOFILENAME</td>
+                <td>@prgtb.DIRECTORY</td>
+
+                <td>@prgtb.DURATIONMS</td>
+                <td>@prgtb.CREATOR</td>
+                <td>@prgtb.CREATETIME</td>
+                <td>@prgtb.EDITOR</td>
+                <td>@prgtb.EDITTIME</td>
+                <td>@prgtb.SUBTYPEID</td>
+
+                @if (@prgtb.PRGMSUBTYPETB != null)
+                {
+                    <td>@prgtb.PRGMSUBTYPETB.SUBTYPENAME</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+
+                <td>@prgtb.BITRATE</td>
+                <td>@prgtb.FILESIZE</td>
+                <td>@prgtb.LOCKED</td>
+                <td>@prgtb.CHECKOR</td>
+                <td>@prgtb.CHECKTIME</td>
+                <td>@prgtb.CHECKUP</td>
+            </tr>
+
+        }
+        </tbody>
+        <tfoot>
+        <tr>
+            <th>PID</th>
+            <th>PRGMNAME</th>
+            <th>PRGMTYPEID</th>
+            <th>PRGMTYPETB</th>
+            <th>VIDEOFILENAME</th>
+            <th>DIRECTORY</th>
+            <th>DURATIONMS</th>
+            <th>CREATOR</th>
+            <th>CREATETIME</th>
+            <th>EDITOR</th>
+            <th>EDITTIME</th>
+            <th>SUBTYPEID</th>
+            <th>PRGMSUBTYPETB</th>
+            <th>BITRATE</th>
+            <th>FILESIZE</th>
+            <th>LOCKED</th>
+            <th>CHECKOR</th>
+            <th>CHECKTIME</th>
+            <th>CHECKUP</th>
+        </tr>
+        </tfoot>
+    </table>
+}
+
+
+
+
+@section Customs_Scripts{
+
+    <script src="~/lib/jquery.dataTables/js/jquery.dataTables.min.js"></script>
+    <script src="~/lib/jquery.dataTables/js/dataTables.bootstrap4.min.js"></script>
+
+    @if (Model != null)
+    {
+
+        <script type="text/javascript">
+
+            var modelData = @Json.Serialize(Model);
+
+            function DownloadFile(format) {
+                $.ajax({
+                    cache: false,
+                    url: '/Finder/CreateDocument',
+                    method: "POST",
+                    dataType: "json",
+                    data: { data: modelData, format: format },
+                    success: function(data) {
+                        window.location = '/Finder/DownloadDocument?fileGuid=' +
+                            data.fileGuid +
+                            '&fileName=' +
+                            data.fileName;
+                    }
+                });
+            }
+
+            $(document).ready(function() {
+                $('#example').DataTable({
+                    "scrollX": true
+                });
+            });
+        </script>
+    }
+}
+
+@section Customs_Styles{
+
+    <link href="~/lib/jquery.dataTables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+
+

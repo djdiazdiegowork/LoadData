@@ -1,0 +1,151 @@
+﻿@page
+@model PMIWeb.Areas.Identity.Pages.Admin.UserDetailModel
+@{
+    ViewBag.Manage_Menu_Active = "m-menu__item--active";
+}
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title"></h3>
+        </div>
+    </div>
+</div>
+<!-- END: Subheader -->
+<div class="m-content">
+    <div class="row">
+
+        <div class="col-lg-6">
+
+            <!--begin::Portlet-->
+            <div class="m-portlet m-portlet--mobile m-portlet--bordered-custom rounded-custom">
+                <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <span class="m-portlet__head-icon">
+                                <i class="flaticon-information change-panel-color-header-text"></i>
+                            </span>
+                            <h3 class="m-portlet__head-text m--font-transform-u change-panel-color-header-text">
+                                Detalles
+                            </h3>
+                        </div>
+                    </div>
+
+                </div>
+                <!--begin::Form-->
+                <form class="m-form">
+
+                    <div class="m-portlet__body">
+
+                        <div class="m-form__section m-form__section--first">
+
+                            <div class="m-form__heading">
+                                <h3 class="m-form__heading-title ">Informaci&oacute;n personal</h3>
+                            </div>
+                            <div class="m-widget13">
+                                <div class="m-widget13__item">
+                                    <span class="m-widget13__desc m--align-right">
+                                        Nombre:
+                                    </span>
+                                    <span class="m-widget13__text m-widget13__text-bolder">
+                                        @Model.CurrentUser.Name
+                                    </span>
+                                </div>
+                                <div class="m-widget13__item">
+                                    <span class="m-widget13__desc m--align-right">
+                                        Apellidos:
+                                    </span>
+                                    <span class="m-widget13__text m-widget13__text-bolder">
+                                        @Model.CurrentUser.FirstName @Model.CurrentUser.LastName
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="m-form__seperator m-form__seperator--dashed"></div>
+
+                        <div class="m-form__section m-form__section--last">
+                            <div class="m-form__heading">
+                                <h3 class="m-form__heading-title ">Informaci&oacute;n del sistema</h3>
+                            </div>
+                            <div class="m-widget13">
+                                <div class="m-widget13__item">
+                                    <span class="m-widget13__desc m--align-right">
+                                        Nombre de usuario:
+                                    </span>
+                                    <span class="m-widget13__text m-widget13__text-bolder">
+                                        @Model.CurrentUser.UserName
+                                    </span>
+                                </div>
+                                <div class="m-widget13__item">
+                                    <span class="m-widget13__desc m--align-right">
+                                        Correo Electr&oacute;nico:
+                                    </span>
+                                    <span class="m-widget13__text m-widget13__text-bolder">
+                                        @Model.CurrentUser.Email
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="m-form__section m-form__section--last">
+                            <div class="m-section__content">
+
+                                @if (Model.Roles.Any())
+                                {
+                                    <table class="table m-table table-hover">
+                                        <thead style="background-color: #2a94d0; color: #fff">
+                                            <tr>
+                                                <th>
+                                                    Grupo de Permisos
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var rol in Model.Roles)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <p class="m-list-search__result-item mt-0 mb-0">
+                                                            <span class="m-list-search__result-item-icon"><i class="flaticon-network m--font-success"></i></span>
+                                                            <span class="m-list-search__result-item-text ml-1">@rol</span>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                }
+                                else
+                                {
+                                    <p class="m--font-info">No se encontraron grupos para este usuario.</p>
+                                }
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="m-portlet__foot m-portlet__foot--fit">
+                        <div class="m-form__actions m-form__actions">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <a class="btn m-btn--pill btn-brand" href="/Identity/Admin/UserEdit?userId=@Model.CurrentUser.Id">Editar</a>
+                                    <a class="btn m-btn--pill btn-default" asp-page="./Index">Cancelar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!--end::Form-->
+            </div>
+
+            <!--end::Portlet-->
+
+        </div>
+
+    </div>
+</div>

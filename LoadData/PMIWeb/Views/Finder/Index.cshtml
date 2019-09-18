@@ -1,0 +1,1696 @@
+﻿@using Common
+@model FormModel
+@{
+    ViewBag.Title = "Buscador Avanzado";
+    ViewBag.Search_Menu_Active = "m-menu__item--active";
+    //Layout = "_Layout";
+}
+<!-- BEGIN: Subheader -->
+<div class="m-subheader ">
+    <div class="d-flex align-items-center">
+        <div class="mr-auto">
+            <h3 class="m-subheader__title"></h3>
+        </div>
+    </div>
+</div>
+
+<!-- END: Subheader -->
+<div class="m-content">
+    <form asp-action="Index" asp-controller="Finder" method="post" id="formFinder" class="m-form">
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="m-portlet m-portlet--bordered-custom rounded-custom">
+                    <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="flaticon-search-magnifier-interface-symbol change-panel-color-header-text"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text m--font-transform-u change-panel-color-header-text">
+                                    BUSCADOR AVANZADO
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body rounded-bottom">
+                        <div class="m-form__section m-form__section--first">
+                            <div class="form-group m-form__group">
+                                <div class="input-group">
+                                    <input asp-for="GeneralSearch" type="text" class="form-control" placeholder="Inserte el criterio de búsqueda, no se tienen en cuenta criterios numéricos">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-brand" type="submit">Buscar!</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4 mb-sm-5">
+                <div class="m-portlet m-portlet--bordered-custom rounded-custom h-sm-100">
+
+                    <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="fas fa-database change-panel-color-header-text"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text m--font-transform-u change-panel-color-header-text">
+                                    Base de datos
+                                </h3>
+                            </div>
+                        </div>
+                        @*<div class="m-portlet__head-tools">
+                                <ul class="m-portlet__nav">
+                                    <li class="m-portlet__nav-item">
+                                        <a href="#" m-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon"><i class="la la-expand text-white"></i></a>
+                                    </li>
+                                </ul>
+                            </div>*@
+                    </div>
+
+                    <div class="m-portlet__body rounded-bottom">
+
+                        <div class="m-form__group form-group" id="PRGMID_CONTROL">
+                            <div class="m-form__heading">
+                                <h5 class="m--font-transform-u">PID</h5>
+                            </div>
+                            <ul class="nav nav-tabs  m-tabs-line m-tabs-line--brand" role="tablist" id="PRGMID_CONTROL_COMP_UL">
+                                <li class="nav-item m-tabs__item" name="0">
+                                    <a class="nav-link m-tabs__link active show" data-toggle="tab" href="#m_tabs_1_1" role="tab" aria-selected="true" data-control="PRGMID">Valor</a>
+                                </li>
+                                <li class="nav-item m-tabs__item" name="1">
+                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_1_2" role="tab" aria-selected="true" data-control="PRGMID">Rango</a>
+                                </li>
+                                <li class="nav-item m-tabs__item" name="2">
+                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_1_3" role="tab" aria-selected="false" data-control="PRGMID">Menor que</a>
+                                </li>
+                                <li class="nav-item m-tabs__item" name="3">
+                                    <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_1_4" role="tab" aria-selected="false" data-control="PRGMID">Mayor que</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="PRGMID_CONTROL_VAL_DIV">
+                                <div class="tab-pane active show" id="m_tabs_1_1" role="tabpanel">
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12">
+                                            <div class="m-bootstrap-touchspin-brand">
+                                                <input id="touchspin_7" type="text" class="form-control" name="PRGMID" placeholder="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="m_tabs_1_2" role="tabpanel">
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-6 mb-2 mb-sm-0">
+                                            <div class="m-bootstrap-touchspin-brand">
+                                                <input id="touchspin_7_1" type="text" class="form-control" name="PRGMID_MIN" placeholder="0">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="m-bootstrap-touchspin-brand">
+                                                <input id="touchspin_7_2" type="text" class="form-control" name="PRGMID_MAX" placeholder="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="m_tabs_1_3" role="tabpanel">
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12">
+                                            <div class="m-bootstrap-touchspin-brand">
+                                                <input id="touchspin_7_3" type="text" class="form-control" name="PRGMID_MENOR" placeholder="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="m_tabs_1_4" role="tabpanel">
+                                    <div class="form-group m-form__group row">
+                                        <div class="col-sm-12">
+                                            <div class="m-bootstrap-touchspin-brand">
+                                                <input id="touchspin_7_4" type="text" class="form-control" name="PRGMID_MAYOR" placeholder="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input asp-for="PRGMID_COMP" type="hidden" id="PRGMID_COMP" />
+                            <input asp-for="PRGMID_VAL_1" type="hidden" id="PRGMID_VAL_1" />
+                            <input asp-for="PRGMID_VAL_2" type="hidden" id="PRGMID_VAL_2" />
+
+                        </div>
+
+                        <div class="m-form__group form-group">
+                            <div class="m-radio-list">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Bloqueado</h5>
+                                </div>
+                                <label class="m-radio m-radio--success">
+                                    <input id="radio7" type="radio" name="LOCKED" value="si"> Si
+                                    <span></span>
+                                </label>
+                                <label class="m-radio m-radio--success">
+                                    <input id="radio8" type="radio" name="LOCKED" value="no"> No
+                                    <span></span>
+                                </label>
+                                <label class="m-radio m-radio--success">
+                                    <input id="radio9" type="radio" name="LOCKED" value="ninguno" checked=""> Cualquier valor
+                                    <span></span>
+                                </label>
+                            </div>
+                            <input asp-for="LOCKED_VAL" id="LOCKED_VAL" type="hidden" />
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-sm-5">
+                <div class="m-portlet m-portlet--bordered-custom rounded-custom h-sm-100">
+
+                    <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="fas fa-video change-panel-color-header-text"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text change-panel-color-header-text m--font-transform-u">
+                                    Video
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--first">
+
+                            <div class="m-form__group form-group" id="DURATIONMS_CONTROL">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Duración</h5>
+                                </div>
+                                <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist" id="DURATIONMS_CONTROL_COMP_UL">
+                                    <li class="nav-item m-tabs__item" name="0">
+                                        <a class="nav-link m-tabs__link active show" data-toggle="tab" href="#m_tabs_2_1" role="tab" aria-selected="true" data-control="DURATIONMS">Valor</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="1">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_2_2" role="tab" aria-selected="true" data-control="DURATIONMS">Rango</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="2">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_2_3" role="tab" aria-selected="false" data-control="DURATIONMS">Menor que</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="3">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_2_4" role="tab" aria-selected="false" data-control="DURATIONMS">Mayor que</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="DURATIONMS_CONTROL_VAL_DIV">
+                                    <div class="tab-pane active show" id="m_tabs_2_1" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12">
+                                                <input class="form-control m-input" id="touchspin_8" readonly="" placeholder="Seleccione un valor" type="text" name="DURATIONMS">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_2_2" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                                <input class="form-control m-input" id="touchspin_8_1" readonly="" placeholder="Seleccione un valor" type="text" name="DURATIONMS_MIN">
+                                            </div>
+                                            <div class="col-sm-6 mt-2 mt-sm-0">
+                                                <input class="form-control m-input" id="touchspin_8_2" readonly="" placeholder="Seleccione un valor" type="text" name="DURATIONMS_MAX">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_2_3" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12">
+                                                <input class="form-control m-input" id="touchspin_8_3" readonly="" placeholder="Seleccione un valor" type="text" name="DURATIONMS_MENOR">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_2_4" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-12">
+                                                <input class="form-control m-input" id="touchspin_8_4" readonly="" placeholder="Seleccione un valor" type="text" name="DURATIONMS_MAYOR">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input asp-for="DURATIONMS_COMP" type="hidden" id="DURATIONMS_COMP" />
+                                <input asp-for="DURATIONMS_VAL_1" type="hidden" id="DURATIONMS_VAL_1" />
+                                <input asp-for="DURATIONMS_VAL_2" type="hidden" id="DURATIONMS_VAL_2" />
+                            </div>
+
+                            <div class="m-form__group form-group" id="BITRATE_CONTROL">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">BITRATE</h5>
+                                </div>
+
+                                <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist" id="BITRATE_CONTROL_COMP_UL">
+                                    <li class="nav-item m-tabs__item" name="0">
+                                        <a class="nav-link m-tabs__link active show" data-toggle="tab" href="#m_tabs_3_1" role="tab" aria-selected="true" data-control="BITRATE">Valor</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="1">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_3_2" role="tab" aria-selected="true" data-control="BITRATE">Rango</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="2">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_3_3" role="tab" aria-selected="false" data-control="BITRATE">Menor que</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="3">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_3_4" role="tab" aria-selected="false" data-control="BITRATE">Mayor que</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="BITRATE_CONTROL_VAL_DIV">
+                                    <div class="tab-pane active show" id="m_tabs_3_1" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_9" type="text" class="form-control" name="BITRATE" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select class="form-control m-bootstrap-select m_selectpicker">
+                                                    <option>MB/S</option>
+                                                    <option>KB/S</option>
+                                                    <option>B/S</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_3_2" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_9_1" type="text" class="form-control" name="BITRATE_MIN" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_9_2" type="text" class="form-control" name="BITRATE_MAX" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <select class="form-control m-bootstrap-select m_selectpicker">
+                                                    <option>MB/S</option>
+                                                    <option>KB/S</option>
+                                                    <option>B/S</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_3_3" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_9_3" type="text" class="form-control" name="BITRATE_MENOR" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select class="form-control m-bootstrap-select m_selectpicker">
+                                                    <option>MB/S</option>
+                                                    <option>KB/S</option>
+                                                    <option>B/S</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_3_4" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_9_4" type="text" class="form-control" name="PRGMID_MAYOR" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select class="form-control m-bootstrap-select m_selectpicker">
+                                                    <option>MB/S</option>
+                                                    <option>KB/S</option>
+                                                    <option>B/S</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input asp-for="BITRATE_COMP" type="hidden" id="BITRATE_COMP" />
+                                <input asp-for="BITRATE_TYPE" type="hidden" id="BITRATE_TYPE" />
+                                <input asp-for="BITRATE_VAL_1" type="hidden" id="BITRATE_VAL_1" />
+                                <input asp-for="BITRATE_VAL_2" type="hidden" id="BITRATE_VAL_2" />
+                            </div>
+
+                            <div class="m-form__group form-group" id="FILESIZE_CONTROL">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Tamaño del Archivo</h5>
+                                </div>
+                                <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist" id="FILESIZE_CONTROL_COMP_UL">
+                                    <li class="nav-item m-tabs__item" name="0">
+                                        <a class="nav-link m-tabs__link active show" data-toggle="tab" href="#m_tabs_4_1" role="tab" aria-selected="true" data-control="FILESIZE">Valor</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="1">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_4_2" role="tab" aria-selected="true" data-control="FILESIZE">Rango</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="2">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_4_3" role="tab" aria-selected="false" data-control="FILESIZE">Menor que</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="3">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_4_4" role="tab" aria-selected="false" data-control="FILESIZE">Mayor que</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" data-control="FILESIZE">
+                                    <div class="tab-pane active show" id="m_tabs_4_1" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_10" type="text" class="form-control" name="FILESIZE" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select class="form-control m-bootstrap-select m_selectpicker">
+                                                    <option>GB</option>
+                                                    <option>MB</option>
+                                                    <option>KB</option>
+                                                    <option>B</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_4_2" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_10_1" type="text" class="form-control" name="FILESIZEMIN" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_10_2" type="text" class="form-control" name="FILESIZE_MAX" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <select class="form-control m-bootstrap-select m_selectpicker">
+                                                    <option>GB</option>
+                                                    <option>MB</option>
+                                                    <option>KB</option>
+                                                    <option>B</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_4_3" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_10_3" type="text" class="form-control" name="FILESIZE_MENOR" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select class="form-control m-bootstrap-select m_selectpicker">
+                                                    <option>GB</option>
+                                                    <option>MB</option>
+                                                    <option>KB</option>
+                                                    <option>B</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_4_4" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-6 mb-2 mb-sm-0">
+                                                <div class="m-bootstrap-touchspin-brand">
+                                                    <input id="touchspin_10_4" type="text" class="form-control" name="FILESIZE_MAYOR" placeholder="0">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select class="form-control m-bootstrap-select m_selectpicker">
+                                                    <option>GB</option>
+                                                    <option>MB</option>
+                                                    <option>KB</option>
+                                                    <option>B</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input asp-for="FILESIZE_COMP" type="hidden" id="FILESIZE_COMP" />
+                                <input asp-for="FILESIZE_TYPE" type="hidden" id="FILESIZE_TYPE" />
+                                <input asp-for="FILESIZE_VAL_1" type="hidden" id="FILESIZE_VAL_1" />
+                                <input asp-for="FILESIZE_VAL_2" type="hidden" id="FILESIZE_VAL_2" />
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-sm-5">
+                <div class="m-portlet m-portlet--bordered-custom rounded-custom h-sm-100">
+
+                    <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="fas fa-users change-panel-color-header-text"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text change-panel-color-header-text m--font-transform-u">
+                                    Usuarios
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--first">
+
+                            <div class="form-group m-form__group">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Creador</h5>
+                                </div>
+                                <div id="CREATOR" class="form-control select2" tabindex="-1" aria-hidden="true" name="valor">
+
+                                </div>
+                                <input asp-for="CREATOR_VAL" type="hidden" id="CREATOR_VAL" />
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">EDITOR</h5>
+                                </div>
+                                <div id="EDITOR" class="form-control select2" tabindex="-1" aria-hidden="true" name="valor">
+
+                                </div>
+                                <input asp-for="EDITOR_VAL" type="hidden" id="EDITOR_VAL" />
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Revisor</h5>
+                                </div>
+                                <div id="CHECKOR" class="form-control select2" tabindex="-1" aria-hidden="true" name="valor">
+
+                                </div>
+                                <input asp-for="CHECKOR_VAL" type="hidden" id="CHECKOR_VAL" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-4 mb-sm-5">
+                <div class="m-portlet m-portlet--bordered-custom rounded-custom h-sm-100">
+
+                    <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="fas fa-tv change-panel-color-header-text"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text change-panel-color-header-text m--font-transform-u">
+                                    Televisivos y de Contenidos
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--first">
+
+                            <div class="form-group m-form__group">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Tipo de Programa</h5>
+                                </div>
+                                <div id="PRGMTYPENAME" class="form-control select2" tabindex="-1" aria-hidden="true" name="PRGMTYPENAME">
+
+                                </div>
+                                <input asp-for="PRGMTYPENAME_VAL" type="hidden" id="PRGMTYPENAME_VAL" />
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Subtipo de programa</h5>
+                                </div>
+                                <div id="SUBTYPENAME" class="form-control select2" tabindex="-1" aria-hidden="true" name="SUBTYPENAME">
+
+                                </div>
+                                <input asp-for="SUBTYPENAME_VAL" type="hidden" id="SUBTYPENAME_VAL" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-sm-5">
+                <div class="m-portlet m-portlet--bordered-custom rounded-custom h-sm-100">
+
+                    <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="fas fa-hdd change-panel-color-header-text"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text change-panel-color-header-text m--font-transform-u">
+                                    Almacenamiento
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--first">
+
+                            <div class="form-group m-form__group">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Nombre del Programa</h5>
+                                </div>
+                                <div id="PRGMNAME" class="form-control select2" tabindex="-1" aria-hidden="true" name="PRGMNAME">
+
+                                </div>
+                                <input asp-for="PRGMNAME_VAL" type="hidden" id="PRGMNAME_VAL" />
+                            </div>
+
+                            <div class="form-group m-form__group">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Directorio</h5>
+                                </div>
+                                <div style="min-height: 300px; overflow-y: auto" id="DIRECTORY" class="form-control" tabindex="-1" aria-hidden="true" name="DIRECTORY">
+
+                                </div>
+                                <input asp-for="DIRECTORY_VAL" type="hidden" id="DIRECTORY_VAL" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-sm-5">
+                <div class="m-portlet m-portlet--bordered-custom rounded-custom h-sm-100">
+
+                    <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="fas fa-random change-panel-color-header-text"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text change-panel-color-header-text m--font-transform-u">
+                                    Flujo de Produción
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--first">
+
+                            <div class="m-form__group form-group">
+                                <div class="m-radio-list">
+                                    <div class="m-form__heading">
+                                        <h5 class="m--font-transform-u">Comprobado</h5>
+                                    </div>
+                                    <label class="m-radio m-radio--success">
+                                        <input id="radio10" type="radio" name="CHECKUP" value="si"> Si
+                                        <span></span>
+                                    </label>
+                                    <label class="m-radio m-radio--success">
+                                        <input id="radio11" type="radio" name="CHECKUP" value="no"> No
+                                        <span></span>
+                                    </label>
+                                    <label class="m-radio m-radio--success">
+                                        <input id="radio12" type="radio" name="CHECKUP" value="ninguno" checked=""> Cualquier valor
+                                        <span></span>
+                                    </label>
+                                </div>
+                                <input asp-for="CHECKUP_VAL" type="hidden" id="CHECKUP_VAL" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="m-portlet m-portlet--bordered-custom rounded-custom">
+
+                    <div class="m-portlet__head change-panel-color-header rounded-top-custom">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <span class="m-portlet__head-icon">
+                                    <i class="fas fa-calendar-alt change-panel-color-header-text"></i>
+                                </span>
+                                <h3 class="m-portlet__head-text change-panel-color-header-text m--font-transform-u">
+                                    Tiempos
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-portlet__body">
+                        <div class="m-form__section m-form__section--first">
+
+                            <div class="m-form__group form-group" id="CREATETIME_CONTROL">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Fecha de Creación</h5>
+                                </div>
+                                <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
+                                    <li class="nav-item m-tabs__item" name="0">
+                                        <a class="nav-link m-tabs__link active show" data-toggle="tab" href="#m_tabs_5_1" role="tab" aria-selected="true" data-control="CREATETIME">Período</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="1">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_5_2" role="tab" aria-selected="true" data-control="CREATETIME">Fecha</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="2">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_5_3" role="tab" aria-selected="true" data-control="CREATETIME">Mes/Año</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="3">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_5_4" role="tab" aria-selected="true" data-control="CREATETIME">Año</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="4">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_5_5" role="tab" aria-selected="true" data-control="CREATETIME">Trimestre</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="5">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_5_6" role="tab" aria-selected="true" data-control="CREATETIME">Verano</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="6">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_5_7" role="tab" aria-selected="true" data-control="CREATETIME">Antes de</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="7">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_5_8" role="tab" aria-selected="true" data-control="CREATETIME">Después de</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="CREATETIME_CONTROL_VAL_DIV">
+                                    <div class="tab-pane active show" id="m_tabs_5_1" name="0" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4 m_daterangepicker">
+                                                <input id="CREATETIME_CONTROL_DATERANGE_INPUT" readonly type="text" class="form-control  m-input" placeholder="Seleccione un valor" />
+                                                <input type="hidden" class="input_aux" />
+                                                <input type="hidden" class="input_aux" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_5_2" name="1" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_5_3" name="2" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepicker" data-date-format="mm/yyyy" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_5_4" name="3" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepickeryear" data-date-format="yyyy" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_5_5" name="4" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepicker_quarter" readonly placeholder="Seleccione un valor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_5_6" name="5" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepicker_summer" readonly placeholder="Seleccione un valor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_5_7" name="6" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_5_8" name="7" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <input asp-for="CREATETIME_COMP" type="hidden" id="CREATETIME_COMP" />
+                                <input asp-for="CREATETIME_VAL_1" type="hidden" id="CREATETIME_VAL_1" />
+                                <input asp-for="CREATETIME_VAL_2" type="hidden" id="CREATETIME_VAL_2" />
+                            </div>
+
+                            <div class="m-form__group form-group" id="EDITTIME_CONTROL">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Fecha de Edición</h5>
+                                </div>
+                                <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
+                                    <li class="nav-item m-tabs__item" name="0">
+                                        <a class="nav-link m-tabs__link active show" data-toggle="tab" href="#m_tabs_6_1" role="tab" aria-selected="true" data-control="EDITTIME">Período</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="1">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_2" role="tab" aria-selected="true" data-control="EDITTIME">Fecha</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="2">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_3" role="tab" aria-selected="true" data-control="EDITTIME">Mes/Año</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="3">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_4" role="tab" aria-selected="true" data-control="EDITTIME">Año</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="4">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_5" role="tab" aria-selected="true" data-control="EDITTIME">Trimestre</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="5">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_6" role="tab" aria-selected="true" data-control="EDITTIME">Verano</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="6">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_7" role="tab" aria-selected="true" data-control="EDITTIME">Antes de</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="7">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_6_8" role="tab" aria-selected="true" data-control="EDITTIME">Después de</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="EDITTIME_CONTROL_VAL_DIV">
+                                    <div class="tab-pane active show" id="m_tabs_6_1" name="0" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4 m_daterangepicker">
+                                                <input id="EDITTIME_CONTROL_DATERANGE_INPUT" readonly type="text" class="form-control m-input" placeholder="Seleccione un valor" />
+                                                <input type="hidden" class="input_aux" />
+                                                <input type="hidden" class="input_aux" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_6_2" name="1" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_6_3" name="2" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepicker" data-date-format="mm/yyyy" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_6_4" name="3" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepickeryear" data-date-format="yyyy" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_6_5" name="4" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepicker_quarter" readonly placeholder="Seleccione un valor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_6_6" name="5" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepicker_summer" readonly placeholder="Seleccione un valor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_6_7" name="6" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_6_8" name="7" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <input asp-for="EDITTIME_COMP" type="hidden" id="EDITTIME_COMP" />
+                                <input asp-for="EDITTIME_VAL_1" type="hidden" id="EDITTIME_VAL_1" />
+                                <input asp-for="EDITTIME_VAL_2" type="hidden" id="EDITTIME_VAL_2" />
+                            </div>
+
+                            <div class="m-form__group form-group" id="CHECKTIME_CONTROL">
+                                <div class="m-form__heading">
+                                    <h5 class="m--font-transform-u">Fecha de Revisión</h5>
+                                </div>
+                                <ul class="nav nav-tabs  m-tabs-line m-tabs-line--primary" role="tablist">
+                                    <li class="nav-item m-tabs__item" name="0">
+                                        <a class="nav-link m-tabs__link active show" data-toggle="tab" href="#m_tabs_7_1" role="tab" aria-selected="true" data-control="CHECKTIME">Período</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="1">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_7_2" role="tab" aria-selected="true" data-control="CHECKTIME">Fecha</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="2">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_7_3" role="tab" aria-selected="true" data-control="CHECKTIME">Mes/Año</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="3">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_7_4" role="tab" aria-selected="true" data-control="CHECKTIME">Año</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="4">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_7_5" role="tab" aria-selected="true" data-control="CHECKTIME">Trimestre</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="5">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_7_6" role="tab" aria-selected="true" data-control="CHECKTIME">Verano</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="6">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_7_7" role="tab" aria-selected="true" data-control="CHECKTIME">Antes de</a>
+                                    </li>
+                                    <li class="nav-item m-tabs__item" name="7">
+                                        <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_tabs_7_8" role="tab" aria-selected="true" data-control="CHECKTIME">Después de</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="CHECKTIME_CONTROL_VAL_DIV">
+                                    <div class="tab-pane active show" id="m_tabs_7_1" name="0" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4 m_daterangepicker">
+                                                <input id="CHECKTIME_CONTROL_DATERANGE_INPUT" type="text" class="form-control m-input" readonly placeholder="Seleccione un valor" />
+                                                <input type="hidden" class="input_aux" />
+                                                <input type="hidden" class="input_aux" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_7_2" name="1" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_7_3" name="2" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepicker" data-date-format="mm/yyyy" readonly placeholder="Seleccione un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_7_4" name="3" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepickeryear" data-date-format="yyyy" readonly placeholder="Selecciona un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_7_5" name="4" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datepicker_quarter" readonly placeholder="Selecciona un valor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_7_6" name="5" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control m-input datepicker_summer" readonly placeholder="Selecciona un valor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_7_7" name="6" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Selecciona un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane" id="m_tabs_7_8" name="7" role="tabpanel">
+                                        <div class="form-group m-form__group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control datetimepicker" readonly placeholder="Selecciona un valor">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <input asp-for="CHECKTIME_COMP" type="hidden" id="CHECKTIME_COMP" />
+                                <input asp-for="CHECKTIME_VAL_1" type="hidden" id="CHECKTIME_VAL_1" />
+                                <input asp-for="CHECKTIME_VAL_2" type="hidden" id="CHECKTIME_VAL_2" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+</div>
+@section Customs_Scripts{
+
+    <script type="text/javascript" src="~/plugins/moment/moment-2.24.0.min.js"></script>
+    <script type="text/javascript" src="~/plugins/moment/moment-2.24.0-es.js"></script>
+    <script type="text/javascript" src="~/plugins/moment/moment-with-locales.min.js"></script>
+
+    <script type="text/javascript">
+
+        var InitTimepicker = {
+            init: function(element) {
+                $(element).timepicker({
+                    timeFormat: 'HH:mm:ss',
+                    defaultTime: "0:00:00",
+                    minuteStep: 1,
+                    secondStep: 1,
+                    showSeconds: !0,
+                    showMeridian: !1
+                });
+
+                $(element).timepicker().on('changeTime.timepicker', function (e) {
+
+                    let hrT = e.time.hours;
+                    console.log(hrT);
+                    if (hrT > 24) {
+                        let hrSt = hrT % 24;
+                        $(this).timepicker('setTime', hrSt + ":" + e.time.minutes + ":" + e.time.seconds);
+
+                    }
+
+                    //console.log('The time is ' + e.time.value);
+                    //console.log('The hour is ' + e.time.hours);
+                    //console.log('The minute is ' + e.time.minutes);
+                    //console.log('The second is ' + e.time.seconds);
+                    //console.log('The meridian is ' + e.time.meridian);
+
+
+                });
+
+            }
+
+        };
+
+        var InitTouchspin = {
+            init: function(element) {
+                $(element).TouchSpin({
+                    buttondown_class: "btn btn-secondary",
+                    buttonup_class: "btn btn-secondary",
+                    min: 0,
+                    max: 1e9,
+                    step: 1,
+                    verticalbuttons: !0,
+                    //decimals: 2,
+                    boostat: 5,
+                    maxboostedstep: 10,
+                    verticalupclass: "la la-angle-up",
+                    verticaldownclass: "la la-angle-down"
+                });
+            }
+        };
+
+        var InitSelect = {
+            init: function () {
+                $(".m_selectpicker").selectpicker();
+            }
+        };
+
+        jQuery(document).ready(function () {
+
+            $.fn.datetimepicker.dates['es'] = {
+                days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+                daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+                daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
+                months: ["Enero de", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                today: "Hoy",
+                suffix: [],
+                meridiem: ["AM", "PM"]
+            };
+
+            $.fn.datepicker.dates['es'] = {
+                days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+                daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+                daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
+                months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+                today: "Hoy",
+                suffix: [],
+                meridiem: ["AM", "PM"]
+            };
+            moment.locale('es');
+            $(".m_daterangepicker").daterangepicker({
+                    buttonClasses: "m-btn btn",
+                    applyClass: "btn-primary",
+                    cancelClass: "btn-secondary",
+                    locale: {
+                        format: "DD-MM-YYYY",
+                        "applyLabel": "Aplicar",
+                        "cancelLabel": "Cancelar",
+                        "fromLabel": "Desde",
+                        "toLabel": "hasta",
+                        "customRangeLabel": "Personalizado",
+                        "daysOfWeek": ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"],
+                        "monthNames": ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+                        ],
+                        "firstDay": 1
+                    }
+                }, function (a, t, n) {
+                $(".m_daterangepicker .form-control").val(a.format("DD-MM-YYYY") + " a " + t.format("DD-MM-YYYY"));
+            }), $(".m_daterangepicker_modal").daterangepicker({
+                    buttonClasses: "m-btn btn",
+                    applyClass: "btn-primary",
+                    cancelClass: "btn-secondary"
+                }, function (a, t, n) {
+                $(".m_daterangepicker .form-control").val(a.format("DD-MM-YYYY") +" a " + t.format("DD-MM-YY"));
+            });
+
+            $('.datetimepicker').datetimepicker({
+                language: 'es',
+                locale: 'es',
+                format: "dd-mm-yyyy - HH:ii P",
+                showMeridian: !0,
+                todayHighlight: !0,
+                autoclose: !0
+            });
+
+            InitSelect.init();
+
+            InitTimepicker.init("#touchspin_8, #m_touchspin_8_modal");
+            InitTimepicker.init("#touchspin_8_1, #touchspin_8_1_modal");
+            InitTimepicker.init("#touchspin_8_2, #touchspin_8_2_modal");
+            InitTimepicker.init("#touchspin_8_3, #touchspin_8_3_modal");
+            InitTimepicker.init("#touchspin_8_4, #touchspin_8_4_modal");
+
+            InitTouchspin.init("#touchspin_7, #touchspin_7_modal");
+            InitTouchspin.init("#touchspin_7_1, #touchspin_7_1_modal");
+            InitTouchspin.init("#touchspin_7_2, #touchspin_7_2_modal");
+            InitTouchspin.init("#touchspin_7_3, #touchspin_7_3_modal");
+            InitTouchspin.init("#touchspin_7_4, #touchspin_7_4_modal");
+
+            InitTouchspin.init("#touchspin_9, #touchspin_9_modal");
+            InitTouchspin.init("#touchspin_9_1, #touchspin_9_1_modal");
+            InitTouchspin.init("#touchspin_9_2, #touchspin_9_2_modal");
+            InitTouchspin.init("#touchspin_9_3, #touchspin_9_3_modal");
+            InitTouchspin.init("#touchspin_9_4, #touchspin_9_4_modal");
+
+            InitTouchspin.init("#touchspin_10, #touchspin_10_modal");
+            InitTouchspin.init("#touchspin_10_1, #touchspin_10_1_modal");
+            InitTouchspin.init("#touchspin_10_2, #touchspin_10_2_modal");
+            InitTouchspin.init("#touchspin_10_3, #touchspin_10_3_modal");
+            InitTouchspin.init("#touchspin_10_4, #touchspin_10_4_modal");
+
+
+            $('.datepicker').datepicker({
+                format: "MM - yyyy",
+                startView: "months",
+                minViewMode: "months",
+                language: 'es',
+                locale: 'es',
+                autoclose: !0
+                });
+            $('.datepickeryear').datepicker(
+                {
+                    minViewMode: "years",
+                    autoclose: !0
+                });
+
+            //// Opcion trimestral para el datepicker
+            $.fn.datepicker.dates['qtrs'] = {
+                days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                daysShort: ["Sun", "Moon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                months: ["Enero a Marzo", "Abril a Junio", "Julio a Septiembre", "Octubre a Diciembre", "", "", "", "", "", "", "", ""],
+                monthsShort: ["Ene&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feb&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mar", "Abr&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;May&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jun", "Jul&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ago&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sep", "Oct&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nov&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dec", "", "", "", "", "", "", "", ""],
+                today: "Today",
+                clear: "Clear",
+                format: 'dd/mm/yyyy',
+                weekStart: 0
+            };
+
+            //// Opcion de verano para el datepicker
+            $.fn.datepicker.dates['summer'] = {
+                days: ["Sunday", "Moonday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                daysShort: ["Sun", "Moon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                months: ["Julio y Agosto", "", "", "", "", "", "", "", "", "", "", ""],
+                monthsShort: ["Julio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Agosto&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp", "", "", "", "", "", "", "", "", "", "", ""],
+                today: "Today",
+                clear: "Clear",
+                format: 'dd/mm/yyyy',
+                weekStart: 0
+            };
+
+            $('.datepicker_quarter').datepicker({
+                format: "MM - yyyy",
+                minViewMode: 1,
+                autoclose: true,
+                language: 'qtrs',
+                forceParse: false
+            }).on("show", function (event) {
+                $(".datepicker-months").find(".month").each(function (index, element) {
+                    if (index > 3) $(element).hide();
+                    else $(element).css('width', '100%');
+                });
+            });
+
+            $('.datepicker_summer').datepicker({
+                format: "MM - yyyy",
+                minViewMode: 1,
+                autoclose: true,
+                language: 'summer',
+                forceParse: false
+            }).on("show", function (event) {
+                $(".datepicker-months").find(".month").each(function (index, element) {
+                    if (index > 0) $(element).hide();
+                    else $(element).css('width', '100%');
+                });
+            });
+
+
+            //$('.durationpicker').durationPicker();
+
+            $.ajax({
+                url: "/Finder/GetDataFrom",
+                method: "POST",
+                dataType: "json",
+                data: {
+                    q: "",
+                    tempTable: PROGRAMTB_DIRECTORY,
+                    treeView: true,
+                },
+                success: function (data) {
+                    //// Creando el control treeview
+                    //// con el plugin de bootstrap
+                    $('#DIRECTORY').treeview({
+                        data: JSON.stringify(data.items),
+                        // custom icons
+                        expandIcon: 'glyphicon glyphicon-folder-close',
+                        collapseIcon: 'glyphicon glyphicon-folder-open',
+                        emptyIcon: 'glyphicon',
+                        nodeIcon: '',
+                        selectedIcon: '',
+                        checkedIcon: 'glyphicon glyphicon-check',
+                        uncheckedIcon: 'glyphicon glyphicon-unchecked',
+                    });
+                }
+            });
+
+            //// Select2
+            //PMI
+            //PRGMTYPENAME
+            $("#PRGMTYPENAME").select2({
+                placeholder: "Seleccione un valor",
+                minimumInputLength: 1,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: "/Finder/GetDataFrom",
+                    dataType: 'json',
+                    type: "POST",
+                    data: function (term/*, page*/) {
+                        return {
+                            q: term, // search term
+                            tempTable: PRGMTYPETB_PRGMTYPENAME,
+                            //page_limit: 10,
+                            //apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+                        };
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {
+                            results: $.map(data.items, function (item) {
+                                return {
+                                    text: item.text,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                },
+            });
+
+            //SUBTYPENAME
+            $("#SUBTYPENAME").select2({
+                placeholder: "Seleccione un valor",
+                minimumInputLength: 1,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: "/Finder/GetDataFrom",
+                    dataType: 'json',
+                    type: "POST",
+                    data: function (term /*, page*/) {
+                        return {
+                            q: term, // search term
+                            tempTable: PRGMSUBTYPETB_SUBTYPENAME,
+                            //page_limit: 10,
+                            //apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+                        };
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {
+                            results: $.map(data.items,
+                                function (item) {
+                                    return {
+                                        text: item.text,
+                                        id: item.id
+                                    }
+                                })
+                        };
+                    }
+                },
+            });
+
+            //VIDEOFILENAME
+            $("#VIDEOFILENAME").select2({
+                placeholder: "Seleccione un valor",
+                minimumInputLength: 1,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: "/Finder/GetDataFrom",
+                    dataType: 'json',
+                    type: "POST",
+                    data: function (term /*, page*/) {
+                        return {
+                            q: term, // search term
+                            tempTable: PROGRAMTB_VIDEOFILENAME,
+                            //page_limit: 10,
+                            //apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+                        };
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {
+                            results: $.map(data.items,
+                                function (item) {
+                                    return {
+                                        text: item.text,
+                                        id: item.id
+                                    }
+                                })
+                        };
+                    }
+                },
+            });
+
+            //PRGMNAME
+            $("#PRGMNAME").select2({
+                placeholder: "Seleccione un valor",
+                minimumInputLength: 1,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: "/Finder/GetDataFrom",
+                    dataType: 'json',
+                    type: "POST",
+                    data: function (term /*, page*/) {
+                        return {
+                            q: term, // search term
+                            tempTable: PROGRAMTB_PRGMNAME,
+                            //page_limit: 10,
+                            //apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+                        };
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {
+                            results: $.map(data.items,
+                                function (item) {
+                                    return {
+                                        text: item.text,
+                                        id: item.id
+                                    }
+                                })
+                        };
+                    }
+                },
+            });
+
+            //CREATOR
+            $("#CREATOR").select2({
+                placeholder: "Seleccione un valor",
+                minimumInputLength: 1,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: "/Finder/GetDataFrom",
+                    dataType: 'json',
+                    type: "POST",
+                    data: function (term /*, page*/) {
+                        return {
+                            q: term, // search term
+                            tempTable: PROGRAMTB_CREATOR,
+                            //page_limit: 10,
+                            //apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+                        };
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {
+                            results: $.map(data.items,
+                                function (item) {
+                                    return {
+                                        text: item.text,
+                                        id: item.id
+                                    }
+                                })
+                        };
+                    }
+                },
+            });
+
+            //EDITOR
+            $("#EDITOR").select2({
+                placeholder: "Seleccione un valor",
+                minimumInputLength: 1,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: "/Finder/GetDataFrom",
+                    dataType: 'json',
+                    type: "POST",
+                    data: function (term /*, page*/) {
+                        return {
+                            q: term, // search term
+                            tempTable: PROGRAMTB_EDITOR,
+                            //page_limit: 10,
+                            //apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+                        };
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {
+                            results: $.map(data.items,
+                                function (item) {
+                                    return {
+                                        text: item.text,
+                                        id: item.id
+                                    }
+                                })
+                        };
+                    }
+                },
+            });
+
+            //CHECKOR
+            $("#CHECKOR").select2({
+                placeholder: "Seleccione un valor",
+                minimumInputLength: 1,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: "/Finder/GetDataFrom",
+                    dataType: 'json',
+                    type: "POST",
+                    data: function (term /*, page*/) {
+                        return {
+                            q: term, // search term
+                            tempTable: PROGRAMTB_CHECKOR,
+                            //page_limit: 10,
+                            //apikey: "ju6z9mjyajq2djue3gbvv26t" // please do not use so this example keeps working
+                        };
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {
+                            results: $.map(data.items,
+                                function (item) {
+                                    return {
+                                        text: item.text,
+                                        id: item.id
+                                    }
+                                })
+                        };
+                    }
+                },
+            });
+
+            function getCompTypeFromTabControl(id) {
+                var mainControl = $('#' + id).find('#' + id + "_COMP_UL");
+                var liActive = mainControl.find('li.active');
+                var comp = liActive.first().attr('name');
+                return comp;
+            }
+
+            function getRealValueFromTabControl(id, findInSelect = false) {
+                var result = [];
+                var mainControl = $('#' + id).find('#' + id + "_VAL_DIV");
+                var tab_control_active = mainControl.find('div.tab-pane.active');
+                var input = tab_control_active.find('input');
+                if (input.length > 1) result = [input.get(0).value, input.get(1).value, selectedVal];
+                else result = [input.get(0).value];
+                if (findInSelect) {
+                    var selectedVal = tab_control_active.find('select').children('option:selected').val();
+                    result.push(selectedVal);
+                }
+                return result;
+            }
+
+            function getRealValueFromTabControl2(id) {
+                var mainControl = $('#' + id).find('#' + id + "_VAL_DIV");
+                var tab_pane = mainControl.find('div.tab-pane.active');
+                var input = tab_pane.find('input');
+                var tab_name = tab_pane.attr('name');
+                if (input.get(0).name == 'daterange') {
+                    var start = input.get(1).value;
+                    var end = input.get(2).value;
+                    return [tab_name, start, end];
+                }
+                var dateValue = input.val();
+                return [tab_name, dateValue];
+            }
+
+            function getValueFromCustomSelect2(id) {
+                var span = $('#s2id_' + id).find('span.select2-chosen');
+                return span.html();
+            }
+
+            function getValueFromCustomTreeView() {
+                var valueDIRECTORY = '';
+                var selectedNodeId = $('#DIRECTORY').treeview('getSelected');
+                if (selectedNodeId != undefined && selectedNodeId.length > 0) {
+                    var valueDIRECTORY = selectedNodeId[0].text + "\\";
+
+                    var parentTemp = $('#DIRECTORY').treeview('getParent', selectedNodeId);
+                    while (parentTemp.nodes != undefined) {
+                        valueDIRECTORY = parentTemp.text + "\\" + valueDIRECTORY;
+                        //alert(valueDIRECTORY);
+                        parentTemp = $('#DIRECTORY').treeview('getParent', parentTemp);
+                    }
+                }
+                return valueDIRECTORY != undefined ? valueDIRECTORY : "undefined";
+            }
+
+            function getValueFromCustomRadio(id) {
+                var control = $('#' + id);
+                var radioChecked = control.find('input[type=radio]:checked');
+                return radioChecked.val();
+            }
+
+            function setValueToInput(idInput, val) {
+                $('#' + idInput).val(val);
+            }
+
+            $('body').on('submit', '#formFinder', function (e) {
+
+                e.preventDefault();
+                //******Tipos numericos****
+                //PRGMID
+                var compTypePrgmId = getCompTypeFromTabControl('PRGMID_CONTROL');
+                var valPrgmId = getRealValueFromTabControl('PRGMID_CONTROL');
+                setValueToInput('PRGMID_COMP', compTypePrgmId);
+                setValueToInput('PRGMID_VAL_1', valPrgmId[0]);
+                if (valPrgmId.length > 1) setValueToInput('PRGMID_VAL_2', valPrgmId[1]);
+
+                //DURATIONMS
+                var compTypeDurationms = getCompTypeFromTabControl('DURATIONMS_CONTROL');
+                var valDurationms = getRealValueFromTabControl('DURATIONMS_CONTROL');
+                setValueToInput('DURATIONMS_COMP', compTypeDurationms);
+                setValueToInput('DURATIONMS_VAL_1', valDurationms[0]);
+                if (valDurationms.length > 1) setValueToInput('DURATIONMS_VAL_2', valDurationms[1]);
+
+                //BITRATE
+                var compTypeBitrate = getCompTypeFromTabControl('BITRATE_CONTROL');
+                var valBitrate = getRealValueFromTabControl('BITRATE_CONTROL', true);
+                setValueToInput('BITRATE_COMP', compTypeBitrate);
+                setValueToInput('BITRATE_VAL_1', valBitrate[0]);
+                if (valBitrate.length > 2) setValueToInput('BITRATE_VAL_2', valBitrate[1]);
+                setValueToInput('BITRATE_TYPE', valBitrate[valBitrate.length - 1]);
+
+                //FILESIZE
+                var compTypeFilesize = getCompTypeFromTabControl('FILESIZE_CONTROL');
+                var valFilesize = getRealValueFromTabControl('FILESIZE_CONTROL', true);
+                setValueToInput('FILESIZE_COMP', compTypeFilesize);
+                setValueToInput('FILESIZE_VAL_1', valFilesize[0]);
+                if (valFilesize.length > 2) setValueToInput('FILESIZE_VAL_2', valFilesize[1]);
+                setValueToInput('FILESIZE_TYPE', valFilesize[valFilesize.length - 1]);
+                //******Tipos numericos FIN****
+
+                //****Tipos fechas*******
+                //CREATETIME
+                var compTypeValCreateTime = getRealValueFromTabControl2('CREATETIME_CONTROL');
+                setValueToInput('CREATETIME_COMP', compTypeValCreateTime[0]);
+                setValueToInput('CREATETIME_VAL_1', compTypeValCreateTime[1]);
+                if (compTypeValCreateTime.length > 2) setValueToInput('CREATETIME_VAL_2', compTypeValCreateTime[2]);
+
+                //EDITTIME
+                var compTypeValEditTime = getRealValueFromTabControl2('EDITTIME_CONTROL');
+                setValueToInput('EDITTIME_COMP', compTypeValEditTime[0]);
+                setValueToInput('EDITTIME_VAL_1', compTypeValEditTime[1]);
+                if (compTypeValEditTime.length > 2) setValueToInput('EDITTIME_VAL_2', compTypeValEditTime[2]);
+
+                //CHECKTIME
+                var compTypeValCheckTime = getRealValueFromTabControl2('CHECKTIME_CONTROL');
+                setValueToInput('CHECKTIME_COMP', compTypeValCheckTime[0]);
+                setValueToInput('CHECKTIME_VAL_1', compTypeValCheckTime[1]);
+                if (compTypeValEditTime.length > 2) setValueToInput('CHECKTIME_VAL_2', compTypeValCheckTime[2]);
+                //****FIN Tipos fechas*******
+
+                //****Select2*****
+                //PRGMTYPENAME
+                var valuePRGMTYPENAME = getValueFromCustomSelect2('PRGMTYPENAME');
+                setValueToInput('PRGMTYPENAME_VAL', valuePRGMTYPENAME);
+
+                //SUBTYPENAME
+                var valueSUBTYPENAME = getValueFromCustomSelect2('SUBTYPENAME');
+                setValueToInput('SUBTYPENAME_VAL', valueSUBTYPENAME);
+
+                //VIDEOFILENAME
+                //var valueVIDEOFILENAME = getValueFromCustomSelect2('VIDEOFILENAME');
+                //setValueToInput('VIDEOFILENAME_VAL', valueVIDEOFILENAME);
+
+                //PRGMNAME
+                var valuePRGMNAME = getValueFromCustomSelect2('PRGMNAME');
+                setValueToInput('PRGMNAME_VAL', valuePRGMNAME);
+
+                //CREATOR
+                var valueCREATOR = getValueFromCustomSelect2('CREATOR');
+                setValueToInput('CREATOR_VAL', valueCREATOR);
+
+                //EDITOR
+                var valueEDITOR = getValueFromCustomSelect2('EDITOR');
+                setValueToInput('EDITOR_VAL', valueEDITOR);
+
+                //CHECKOR
+                var valueCHECKOR = getValueFromCustomSelect2('CHECKOR');
+                setValueToInput('CHECKOR_VAL', valueCHECKOR);
+                //****Fin Select2****
+
+                //DIRECTORY
+                var valueDIRECTORY = getValueFromCustomTreeView();
+                setValueToInput('DIRECTORY_VAL', valueDIRECTORY);
+
+                //****Campos booleanos****
+                //LOCKED
+                var valueSelectedOptionRadioLOCKED = getValueFromCustomRadio('LOCKED_CONTROL');
+                setValueToInput('LOCKED_VAL', valueSelectedOptionRadioLOCKED);
+
+                //CHECKUP
+                var valueSelectedOptionRadioCHECKUP = getValueFromCustomRadio('CHECKUP_CONTROL');
+                setValueToInput('CHECKUP_VAL', valueSelectedOptionRadioCHECKUP);
+
+                //****FIN Campos booleanos***
+
+                /**
+                 * Implementacion del posteo del formulario
+                 * mediante ajax.
+                 */
+
+                var formData = $('#formFinder').serialize();
+                $.ajax({
+                    url: $('#formFinder').attr("action"), //recommended
+                    type: "POST",
+                    data: formData,
+                }).done(function (result) {
+                    // do something with the result now
+                    console.log(result);
+                    if (result.status === "success" && result.data != null) {
+                        var data = result.data;
+                        modelData = data;
+                        var modalBodyResult = $('#modalBodyResult');
+                        var tableFirstPart =
+                            '<table id="example" class="table table-striped table-bordered"> <thead ><tr><th>PID</th><th>PRGMNAME</th><th>PRGMTYPEID</th><th>PRGMTYPETB</th><th>DIRECTORY</th><th>DURATIONMS</th><th>CREATOR</th><th>CREATETIME</th><th>EDITOR</th><th>EDITTIME</th><th>SUBTYPEID</th><th>PRGMSUBTYPETB</th><th>BITRATE</th><th>FILESIZE</th><th>LOCKED</th><th>CHECKOR</th><th>CHECKTIME</th><th>CHECKUP</th></tr></thead ><tbody id="tableBodyResult">';
+                        var tableSecondPart =
+                            '</tbody><tfoot ><tr><th>PID</th><th>PRGMNAME</th><th>PRGMTYPEID</th><th>PRGMTYPETB</th><th>DIRECTORY</th><th>DURATIONMS</th><th>CREATOR</th><th>CREATETIME</th><th>EDITOR</th><th>EDITTIME</th><th>SUBTYPEID</th><th>PRGMSUBTYPETB</th><th>BITRATE</th><th>FILESIZE</th><th>LOCKED</th><th>CHECKOR</th><th>CHECKTIME</th><th>CHECKUP</th></tr></tfoot ></table >';
+                        var rows = '';
+                        for (var i = 0; i < data.length; i++) {
+                            var prgtb = data[i];
+                            var prgtypename = prgtb.prgmtypetb != undefined ? prgtb.prgmtypetb.prgmtypename : '-';
+                            var subtypename = prgtb.prgmsubtypetb != undefined ? prgtb.prgmsubtypetb.subtypename : '-';
+                            var row =
+                                '<tr> <td>' + prgtb.prgmid + '</td >' +
+                                '<td>' + prgtb.prgmname + '</td>' +
+                                '<td>' + prgtb.prgmtypeid + '</td>' +
+                                '<td>' + prgtypename + '</td>' +
+                                //'<td>' + prgtb.videofilename + '</td>' +
+                                '<td>' + prgtb.directory + '</td>' +
+                                '<td>' + prgtb.durationms + '</td>' +
+                                '<td>' + prgtb.creator + '</td>' +
+                                '<td>' + prgtb.createtime + '</td>' +
+                                '<td>' + prgtb.editor + '</td>' +
+                                '<td>' + prgtb.edittime + '</td>' +
+                                '<td>' + prgtb.subtypeid + '</td>' +
+                                '<td>' + subtypename + '</td>' +
+                                '<td>' + prgtb.bitrate + '</td>' +
+                                '<td>' + prgtb.filezise + '</td>' +
+                                '<td>' + prgtb.locked + '</td>' +
+                                '<td>' + prgtb.checkor + '</td>' +
+                                '<td>' + prgtb.checktime + '</td>' +
+                                '<td>' + prgtb.checkup + '</td>' +
+                                '</tr >';
+                            rows += row;
+                        }
+
+                        var htmlResult = tableFirstPart + rows + tableSecondPart;
+                        modalBodyResult.html(htmlResult);
+                        var dataTable = $('#example').DataTable({
+                            "scrollX": true
+                        });
+                        $('#modalResult').modal().show();
+                        dataTable.columns.adjust();
+
+                    } else {
+                        alert("No se encontraron resultados");
+                    }
+                });
+
+            });
+
+
+        });
+
+        //// Inicializando las variables que se van a utilizar
+        //// para los nombres de las tablas temporales.
+        var PROGRAMTB_PRGMNAME = '@TempTable.PROGRAMTB_PRGMNAME.ToString("G")';
+        var PRGMTYPETB_PRGMTYPENAME = '@TempTable.PRGMTYPETB_PRGMTYPENAME.ToString("G")';
+        var PROGRAMTB_VIDEOFILENAME = '@TempTable.PROGRAMTB_VIDEOFILENAME.ToString("G")';
+        var PROGRAMTB_DIRECTORY = '@TempTable.PROGRAMTB_DIRECTORY.ToString("G")';
+        var PROGRAMTB_CREATOR = '@TempTable.PROGRAMTB_CREATOR.ToString("G")';
+        var PROGRAMTB_EDITOR = '@TempTable.PROGRAMTB_EDITOR.ToString("G")';
+        var PROGRAMTB_CHECKOR = '@TempTable.PROGRAMTB_CHECKOR.ToString("G")';
+        var PRGMSUBTYPETB_SUBTYPENAME = '@TempTable.PRGMSUBTYPETB_SUBTYPENAME.ToString("G")';
+
+        var modelData = undefined;
+
+        function DownloadFile(format) {
+            $.ajax({
+                cache: false,
+                url: '/Finder/CreateDocument',
+                method: "POST",
+                dataType: "json",
+                data: { data: modelData, format: format },
+                success: function(data) {
+                    window.location = '/Finder/DownloadDocument?fileGuid=' +
+                        data.fileGuid +
+                        '&fileName=' +
+                        data.fileName;
+                }
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,88 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PMIWeb.Areas.Identity.Data
+@inject SignInManager<PMIWebUser> SignInManager
+@inject UserManager<PMIWebUser> UserManager
+
+@{
+    var userName = UserManager.GetUserName(User);
+    var name = UserManager.Users.Where(u => u.UserName == userName).Select(u => u.Name + " " + u.FirstName + " " + u.LastName).FirstOrDefault();
+    var currentName = !string.IsNullOrEmpty(name) ? name : userName;
+    var userId = @UserManager.GetUserId(User);
+}
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img  m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+        m-dropdown-toggle="click">
+        <a href="" class="m-nav__link m-dropdown__toggle">
+            <span class="m-topbar__userpic">
+                <img src="~/app/media/img/users/user-2.png" class="m--img-rounded m--margin-right-10 m--img-centered" alt="" />
+            </span>
+            <span class="m-topbar__welcome" style="font-size: 1.1em;">Hola,&nbsp;</span>
+            <span class="m-topbar__username" style="font-size: 1.1em;">@userName</span>
+        </a>
+        <div class="m-dropdown__wrapper">
+            <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+            <div class="m-dropdown__inner">
+                <div class="m-dropdown__header m--align-center " style="background: url('@Url.Content("~/app/media/img/misc/user_profile_bg.jpg")'); background-size: cover;">
+                    <div class="m-card-user m-card-user--skin-dark d-block text-truncate pr-5">
+                        <div class="m-card-user__pic">
+                            @*<img src="~/app/media/img/users/user-2.png" class="m--img-rounded m--marginless" alt="" />*@
+                            @*<span class="m-type m-type--lg m--bg-danger">
+                                    <span class="m--font-light">
+                                        @currentName.Substring(0, 1).ToUpper()
+                                    </span>
+                                </span>*@
+                        </div>
+                        <div class="m-card-user__details">
+                            <span class="m-card-user__name m--font-weight-500">
+                                @currentName
+                            </span>
+                            <a href="/Identity/Admin/UserDetail?userId=@userId" class="m-card-user__email m--font-weight-300 m-link">@userName</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-dropdown__body">
+                    <div class="m-dropdown__content">
+                        <ul class="m-nav m-nav--skin-light">
+                            <li class="m-nav__section m--hide">
+                                <span class="m-nav__section-text">Section</span>
+                            </li>
+                            <li class="m-nav__item">
+                                <a href="/Identity/Admin/UserDetail?userId=@userId" class="m-nav__link">
+                                    <i class="m-nav__link-icon fa fa-user-circle fa-2x"></i>
+                                    <span class="m-nav__link-title">
+                                        <span class="m-nav__link-wrap">
+                                            <span class="m-nav__link-text">Mi Perfil</span>
+                                        </span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="m-nav__separator m-nav__separator--fit">
+                            </li>
+                            <li class="m-nav__item">
+                                <a href="javascript:document.getElementById('logoutForm').submit()" class="btn m-btn--pill btn-outline-brand m-btn m-btn--custom">Cerrar Sesión</a>
+                                <form asp-area="Identity" asp-page="/Account/Logout" method="post" id="logoutForm" class="navbar-right"></form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+}
+else
+{
+    <li class="m-nav__item m-topbar__notifications m-topbar__notifications--img">
+        <a asp-area="Identity" asp-page="/Account/Login" class="m-nav__link">
+            <span class="m-nav__link-icon"><i class="fa fa-sign-in-alt" style="font-size: 1.1em;"></i></span>
+            <span class="m-nav__link-title">
+                <span class="m-nav__link-wrap">
+                    <span class="m-nav__link-text" style="font-size: 1.1em;">Iniciar Sesión</span>
+                </span>
+            </span>
+        </a>
+    </li>
+
+}

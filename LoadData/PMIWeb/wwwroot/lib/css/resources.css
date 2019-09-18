@@ -1,0 +1,69 @@
+body{ 
+	/*display: none;*/
+ }
+
+.boton_arriba {
+  color: #FFFFFF;
+  background-color: #2386ca;
+}
+.boton_arriba:hover, .boton_arriba:focus, .boton_arriba:active, .boton_arriba.active {
+  color: #FFFFFF;
+  background-color: #3175af;
+}
+.open .boton_arriba.dropdown-toggle {
+  color: #FFFFFF;
+  background-color: #3175af;
+}
+.boton_arriba:active, .boton_arriba.active {
+  background-image: none;
+  background-color: #2386ca;
+}
+.boton_arriba:active:hover, .boton_arriba.active:hover {
+  background-color: #2386ca;
+}
+.open .boton_arriba.dropdown-toggle {
+  background-image: none;
+}
+.boton_arriba.disabled, .boton_arriba.disabled:hover, .boton_arriba.disabled:focus, .boton_arriba.disabled:active, .boton_arriba.disabled.active,
+ .boton_arriba[disabled], .boton_arriba[disabled]:hover, .boton_arriba[disabled]:focus, .boton_arriba[disabled]:active, .boton_arriba[disabled].active, fieldset[disabled]
+ .boton_arriba, fieldset[disabled] .boton_arriba:hover, fieldset[disabled] .boton_arriba:focus, fieldset[disabled] .boton_arriba:active, fieldset[disabled] .boton_arriba.active {
+  background-color: #2386ca;
+}
+.boton_arriba .badge {
+  color: #2386ca;
+  background-color: #FFFFFF;
+}
+	
+
+.boton_abajo {
+  color: #FFFFFF;
+  background-color: #5b86a1;
+}
+.boton_abajo:hover, .boton_abajo:focus, .boton_abajo:active, .boton_abajo.active {
+  color: #FFFFFF;
+  background-color: #3175af;
+}
+.open .boton_abajo.dropdown-toggle {
+  color: #FFFFFF;
+  background-color: #5b86a1;
+}
+.boton_abajo:active, .boton_abajo.active {
+  background-image: none;
+  background-color: #5b86a1;
+}
+.boton_abajo:active:hover, .boton_abajo.active:hover {
+  background-color: #5b86a1;
+}
+.open .boton_abajo.dropdown-toggle {
+  background-image: none;
+}
+.boton_abajo.disabled, .boton_abajo.disabled:hover, .boton_abajo.disabled:focus, .boton_abajo.disabled:active, .boton_abajo.disabled.active,
+ .boton_abajo[disabled], .boton_abajo[disabled]:hover, .boton_abajo[disabled]:focus, .boton_abajo[disabled]:active, .boton_abajo[disabled].active, fieldset[disabled]
+ .boton_abajo, fieldset[disabled] .boton_abajo:hover, fieldset[disabled] .boton_abajo:focus, fieldset[disabled] .boton_abajo:active, fieldset[disabled] .boton_abajo.active {
+  background-color: #5b86a1;
+}
+.boton_abajo .badge {
+  color: #5b86a1;
+  background-color: #FFFFFF;
+}
+	
